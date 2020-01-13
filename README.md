@@ -1,5 +1,6 @@
 # Többrétegű ASP.NET Core webalkalmazás
-Teljes forráskód elérhető: <https://github.com/bmeviauac01/jegyzetek/tree/master/TobbreteguWebalkalmazas-AspNetCore/src>
+
+A forráskód elérhető az `src` mappában van.
 
 Többrétegű alkalmazás web réteggel és REST API-val
 
