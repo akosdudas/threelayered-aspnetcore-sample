@@ -6,10 +6,10 @@ namespace Webshop.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly VevoManager vm;
+        private readonly CustomerManager cm;
 
-        public HomeController(VevoManager vm) => this.vm = vm;
+        public HomeController(CustomerManager cm) => this.cm = cm;
 
-        public async Task<IActionResult> Index() => View(await vm.ListVevok());
+        public async Task<IActionResult> Index() => View(await cm.ListCustomers());
     }
 }

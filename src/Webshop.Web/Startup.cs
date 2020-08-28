@@ -23,14 +23,14 @@ namespace Webshop.Web
         {
             services.AddDbContext<WebshopDb>(options => options.UseSqlServer(Configuration.GetConnectionString("WebshopDb")));
 
-            services.AddTransient<IVevoRepository, VevoRepository>();
-            services.AddTransient<IMegrendelesRepository, MegrendelesRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
-            services.AddTransient<VevoManager>();
+            services.AddTransient<CustomerManager>();
 
             services.AddRouting();
             services.AddRazorPages();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

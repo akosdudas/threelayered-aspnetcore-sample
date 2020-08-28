@@ -13,21 +13,22 @@ namespace Webshop.DAL.EF
         {
         }
 
-        public virtual DbSet<Telephely> Telephely { get; set; }
-        public virtual DbSet<Vevo> Vevo { get; set; }
+        public virtual DbSet<CustomerSite> CustomerSites { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Telephely>(entity =>
+            modelBuilder.Entity<CustomerSite>(entity =>
             {
+                entity.ToTable("CustomerSite");
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Fax)
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ir)
-                    .HasColumnName("IR")
+                entity.Property(e => e.ZipCode)
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
@@ -35,40 +36,42 @@ namespace Webshop.DAL.EF
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Utca).HasMaxLength(50);
+                entity.Property(e => e.Street).HasMaxLength(50);
 
-                entity.Property(e => e.Varos).HasMaxLength(50);
+                entity.Property(e => e.City).HasMaxLength(50);
 
-                entity.Property(e => e.VevoId).HasColumnName("VevoID");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
-                entity.HasOne(d => d.Vevo)
-                    .WithMany(p => p.Telephelyek)
-                    .HasForeignKey(d => d.VevoId);
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.CustomerSites)
+                    .HasForeignKey(d => d.CustomerId);
             });
 
-            modelBuilder.Entity<Vevo>(entity =>
+            modelBuilder.Entity<Customer>(entity =>
             {
+                entity.ToTable("Customer");
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Jelszo).HasMaxLength(50);
+                entity.Property(e => e.Password).HasMaxLength(50);
 
                 entity.Property(e => e.Login).HasMaxLength(50);
 
-                entity.Property(e => e.Nev).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(50);
 
-                entity.Property(e => e.Szamlaszam)
+                entity.Property(e => e.BankAccount)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KozpontiTelephelyId).HasColumnName("KozpontiTelephely");
+                entity.Property(e => e.MainCustomerSiteId).HasColumnName("MainCustomerSiteID");
 
-                entity.HasOne(d => d.KozpontiTelephely)
+                entity.HasOne(d => d.MainCustomerSite)
                     .WithOne()
-                    .HasForeignKey<Vevo>(d => d.KozpontiTelephelyId);
+                    .HasForeignKey<Customer>(d => d.MainCustomerSiteId);
             });
         }
     }

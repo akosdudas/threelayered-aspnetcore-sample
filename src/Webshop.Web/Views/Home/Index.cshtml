@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Webshop.DAL.Vevo>
+﻿@model IEnumerable<Webshop.DAL.Customer>
 
 @{
-    ViewBag.Title = "Vevok";
+    ViewBag.Title = "Customers";
 }
 
-<h2>Vevok</h2>
+<h2>Customers</h2>
 
 <table class="table">
     <tr>
@@ -15,7 +15,7 @@
     {
         <tr>
             <td>
-                @item.Nev (@item.Email)
+                @item.Name (@item.Email)
             </td>
         </tr>
     }
