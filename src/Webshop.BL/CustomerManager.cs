@@ -39,8 +39,8 @@ namespace Webshop.BL
             {
                 // does the customer exist at all?
                 // additionally: due to repetable read locks the record
-                var vevo = await customerRepository.GetCustomerOrNull(customerId);
-                if (vevo == null)
+                var customer = await customerRepository.GetCustomerOrNull(customerId);
+                if (customer == null)
                     return false;
 
                 // does the user have orders?
